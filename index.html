@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>
+        Welcome to WordShare!
+    </title>
+</head>
+<body>
+    
+    <div class="icon-bar">
+        <a id="home" class="active" href="index.html"><i class="fa fa-home"></i></a> 
+        <a href="#" id="newWord"><i class="fa fa-plus" ></i></a> 
+        <a href="#" id="settings" ><i class="fa fa-gear"></i></a> 
+        <a href="#" id="web"><i class="fa fa-globe"></i></a>
+        <a href="#" id="trash"><i class="fa fa-trash"></i></a> 
+      </div>
+<table class="center">
+    <tr><td class="title">Word Share</td></tr>
+    <br><br>
+</table>  
+
+<p class="home">
+    <a onClick="openNewPuzzle(0)" class="link" class="active">Send a new puzzle </a> <br>
+    <a onClick="openNewPuzzle(1)" class="link">Start a co-op game, taking turns  </a> <br>
+    <a onClick="openNewPuzzle(2)" class="link">Singleplayer - a Random Puzzle </a> <br />
+
+</p>
+<script type="text/javascript">
+function openNewPuzzle(menuNum) {
+    
+    switch (menuNum) {
+        case 0:
+            let puzzleWord = prompt("Please type a 5 letter word to send to a friend");
+            let text;
+            if (puzzleWord == null || puzzleWord == "") {
+                text = "User cancelled the prompt.";
+            } else {
+                console.log(puzzleWord)
+            }
+            break;
+        case 1:
+            window.open("./co-op.html", "_self");
+            break;
+        case 2: 
+            window.open("./game.html", "_self");
+            break;
+        default:
+            console.log("Menu error: unknown menu item.");
+    }
+    
+}
+
+</script>
+</body>
+</html>

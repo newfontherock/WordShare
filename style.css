@@ -1,0 +1,123 @@
+.button {
+  background-color: #9b9c9b;
+  border: none;
+  color: white;
+  
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.flip {
+  animation: flip 0.5s ease;
+}
+
+
+@keyframes flip {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+td {
+  background-color: black;
+}
+td.right {
+  background-color: green;
+  
+}
+
+td.halfRight {
+  background-color: yellow;
+}
+
+td.wrong {
+  background-color: grey;
+}
+.enter, .delete {
+  background-color: rgb(77, 72, 72);
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+td {
+    border:1px  solid black;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    font-size: xx-large;
+    color: whitesmoke;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+  }
+
+  .center {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+
+  .title {
+    
+    background-color: grey;
+    height: auto;
+    width: auto;
+    font-size: 5em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 2px 3px green;
+  }
+  body {
+      background-color: rgb(29, 23, 27);
+      text-shadow: 2px 2px rgb(29, 23, 27);
+      text-align: center;
+  }
+
+  .home {
+    
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 2px 2px green;
+    text-align: center;
+    font-size: xx-large;
+    color: whitesmoke;
+  }
+  .icon-bar a {
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  
+  
+  .link:hover {
+    cursor: pointer;
+  }
+  
+  .active {
+    background-color: #04AA6D;
+  }

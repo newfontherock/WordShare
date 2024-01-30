@@ -45,7 +45,7 @@ let today = new Date();
   app.get('/', function(req, res){
   
     console.log("Here's my solution: " + solution);      // your JSON
-      res.json({rightAnswer: solution});    // echo the result back
+    res.send(solution);    // echo the result back
   });
   
 

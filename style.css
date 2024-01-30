@@ -31,6 +31,21 @@
   }
 }
 
+.bounce {
+  animation: .5s linear 4s bounce;
+}
+
+@keyframes bounce {
+  from {
+    /* pushes the sun down past the viewport */
+    transform: translateY(0);
+  }
+  to {
+    /* returns the sun to its default position */
+    transform: translateY(50px);
+  }
+   
+}
 td {
   background-color: black;
 }

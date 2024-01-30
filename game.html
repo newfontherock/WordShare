@@ -21,7 +21,7 @@
     </div>
     <table class="center">
       <tr>
-        <td id="title" class="title">Share the Words!</td>        
+        <td id="title" class="title">Word of the Day!</td>        
       </tr>
       <br><br>
     </table>
@@ -86,15 +86,6 @@
       const serverURL = "http://localhost:3000";
       
       let myTable = document.getElementById("puzzle");
-      // for (var j = 0; j < 6; j++) {
-
-      //   let myRow = myTable.getElementsByTagName("tr")[j];
-      //   for (var i = 0; i < 5; i++) {
-      //     let myCell = myRow.getElementsByTagName("td")[i];
-      //     myCell.backgroundColor = "black";
-      //   }
-
-      // }
       
       class WordShareGame {
 
@@ -154,74 +145,85 @@
         }
 
         async getTodaysSolution() {
-          // try {
-          //   const response = await fetch(serverURL);
-          //   if (!response.ok) {
-          //     throw new Error('Network response was not ok');
-          //   }
-          //   const solution = await response.json();
-          //   return("solution.rightAnswer");
-          // } catch (error) {
-          //   return(console.error(error));
-          // }
-          return("THING")
+          try {
+            const response = await fetch(serverURL);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const solution = await response.text();
+            return(solution);
+          } catch (error) {
+            return(console.error(error));
+          }
+       
         }
 
-        async getColors() {
-             //TODO: Remove for-loop create an array of the cells for the row, myarray.map, see stackoverflow:
-          // https://stackoverflow.com/questions/74192108/wordle-letter-flipping-animation
-            
+        async getColors() {      
           let myTable = document.getElementsByTagName("table")[1];
           let myRow = myTable.getElementsByTagName("tr")[this.attemptNumber];
           let cellArray = Array.from(myRow.cells);
           let answer = this.solution.toLowerCase();
-          let greenCount = 0;
-          let userDidWin = false;
-          cellArray.map(function (cell, index, greenCount) {
+          let alreadyFoundTheseGreen = [""];
+          cellArray.map(function (cell, index) {
             setTimeout(() => {
-              let indexForSearchedLetter = answer.indexOf(cell.innerHTML.toLowerCase());
-
+              let cellCharacter = cell.innerHTML.toLowerCase();
+              let indexForSearchedLetter = answer.indexOf(cellCharacter);
+              // 0
+              //where index = 3. indexfor searched letter = 0
+              
               if (index == indexForSearchedLetter) {
                 console.log("Turn letter at this index Green");
                 cell.classList.add("right");
-                greenCount++;
+                alreadyFoundTheseGreen[alreadyFoundTheseGreen.length] = answer[index];// for repeat letters after the present index.
               }
+
               else if (indexForSearchedLetter != -1) {
-                console.log("Turn Letter at this index Yellow");
-                cell.classList.add("halfRight");
+                if (alreadyFoundTheseGreen.includes(cellCharacter)) { 
+                  // Covers the problem of repeat letters, when first iteration of letter is green, The second instance will always be yellow, unless indexOf() is called again starting from the present index.
+                  if (answer.indexOf(cellCharacter, index) === index) {
+                    console.log("Turn letter at this index Green");
+                    cell.classList.add("right");
+                  }
+                  else {
+                    console.log("Turn Letter at this index Yellow");
+                    cell.classList.add("halfRight");
+                  }
+                }
+                else {
+                  console.log("Turn Letter at this index Yellow");
+                  cell.classList.add("halfRight");
+                }
               }
               else {
                 console.log("Turn letter at this index Grey");
                 cell.classList.add("wrong");
 
               }
-              if(greenCount === 5) {
+              if (wsGame.isSolved()) {
                 let commentCell = document.getElementById("title");
                 commentCell.innerHTML = "You win!!!";
+                cell.classList.add("bounce");
+                cell.style.animationDelay = `${3000}ms`;
+                //TODO: https://developer.mozilla.org/en-US/docs/Web/API/Element/animate
               }
+              
             }, ((index + 1) * 500) / 2);
 
             cell.classList.add("flip");
             cell.style.animationDelay = `${ (index * 500) / 2 }ms`;
-            console.log(greenCount);
-            if (greenCount.length == 5) {
-
-              console.log("");
-              //TODO: end animation for you win
-            }
          })
         }
-//TODO: https://developer.mozilla.org/en-US/docs/Web/API/Element/animate
+
  
 
          
         async checkAnswer() {
           if(this.attemptNumber === 0) { 
             const rightAnswer = await this.getTodaysSolution().then(rightAnswer => {
-              this.solution = rightAnswer;  //TODO: hard coded for testing
+              this.solution = rightAnswer;  
               console.log("client solution" + this.solution);
 
-              if (this.solution == "not updated yet!") {
+               if (this.solution == "not updated yet!") {
                 //TODO: Custom Alert
                 alert("The correct answer for Wordle is pulled from the Wordle Review page of the New York Times at 3:00 AM Eastern. Please check back then!");
                 return;
@@ -256,16 +258,14 @@
           }
 
           else { //  attempt numbers 1 through 4
-            if (this.isSolved) {
-              return;
-            }
+            
             if (this.solution == "not updated yet!") {
               //TODO: Custom Alert
               alert("The correct answer for Wordle is pulled from the Wordle Review page of the New York Times at 3:00 AM Eastern. Please check back then!");
               return;
             }
             if (this.cellNumberThisAttempt == 5) {
-              var myTable = document.getElementsByTagName("table")[1]; //[0] is the title "Word Share"
+              var myTable = document.getElementsByTagName("table")[1]; //[0] is the title "Word of the Day!"
               var myRow = myTable.getElementsByTagName("tr")[this.attemptNumber];
               this.guess = "";
               for (var i = 0; i < 5; i++) {

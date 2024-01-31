@@ -15,9 +15,28 @@
 }
 
 .flip {
-  animation: flip 0.5s ease;
+  animation: 0.5s ease flip;
 }
 
+.win0 {
+  animation:  0.5s ease flip, 0.5s linear 1.5s bounce;
+}
+
+.win1 {
+  animation:  0.5s ease .25s flip, 0.25s ease-in 1.675s bounce;
+} 
+
+.win2 {
+  animation:  0.5s ease .5s flip, 0.25s ease-in 1.875s bounce;
+}
+
+.win3 {
+  animation:  0.5s ease .75s flip, 0.25s ease-in 2.125s bounce;
+}
+
+.win4 {
+  animation:  0.5s ease 1.0s flip, 0.25s ease-in 2.375s bounce;
+}
 
 @keyframes flip {
   0% {
@@ -31,18 +50,21 @@
   }
 }
 
-.bounce {
-  animation: .5s linear 4s bounce;
-}
 
 @keyframes bounce {
-  from {
+  0% {
     /* pushes the sun down past the viewport */
     transform: translateY(0);
   }
-  to {
+  50% {
     /* returns the sun to its default position */
-    transform: translateY(50px);
+    transform: translateY(-50px);
+  }
+  75% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0);
   }
    
 }

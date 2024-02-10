@@ -124,7 +124,11 @@
           var myBody = document.getElementsByTagName("body")[0];
           myTable = document.getElementsByTagName("table")[1]; //[0] is the title "Word Share"
           var myRow = myTable.getElementsByTagName("tr")[this.attemptNumber];
-
+          if (myRow.getElementsByTagName("td")[0].classList.contains("shake")) {
+            for (var i = 0; i < 5; i++) {
+              myRow.getElementsByTagName("td")[i].classList.remove("shake"); //allows us to tell the user you made another word up on this attempt!
+            }
+          }
           if (this.cellNumberThisAttempt != 0) { // 5 means complete answer
             this.cellNumberThisAttempt--;
           }
@@ -206,6 +210,9 @@
         }
 
         async checkAnswer() {
+          if (this.isSolved()) {
+            return;
+          }
           if(this.attemptNumber === 0) { 
             try {
               const rightAnswer = await this.getTodaysSolution().then(rightAnswer => {
@@ -235,7 +242,10 @@
                   this.solution = this.solution.toLowerCase();
                 
                   if (!allAnswers.includes(this.guess)) {
-                    alert("Word not in Dictionary... animate row: shake back and forth");
+                    console.log("Makie it shake!!!!");
+                    for (var i = 0; i < 5; i++){
+                      myRow.getElementsByTagName("td")[i].classList.add("shake");
+                    }
                     return;
                   }
                 }

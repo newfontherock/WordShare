@@ -23,19 +23,23 @@
 }
 
 .win1 {
-  animation:  0.5s ease .25s flip, 0.25s ease-in 1.675s bounce;
+  animation:  0.5s ease .25s flip, 0.5s ease-in 1.675s bounce;
 } 
 
 .win2 {
-  animation:  0.5s ease .5s flip, 0.25s ease-in 1.875s bounce;
+  animation:  0.5s ease .5s flip, 0.5s ease-in 1.875s bounce;
 }
 
 .win3 {
-  animation:  0.5s ease .75s flip, 0.25s ease-in 2.125s bounce;
+  animation:  0.5s ease .75s flip, 0.5s ease-in 2.125s bounce;
 }
 
 .win4 {
-  animation:  0.5s ease 1.0s flip, 0.25s ease-in 2.375s bounce;
+  animation:  0.5s ease 1.0s flip, 0.5s ease-in 2.375s bounce;
+}
+
+.shake {
+  animation: 0.5s ease 0s shake;
 }
 
 @keyframes flip {
@@ -66,8 +70,33 @@
   100% {
     transform: translateY(0);
   }
-   
+} 
+@keyframes shake {
+  0% {
+    /* pushes the sun down past the viewport */
+    transform: translateX(10px);
+  }
+  14% {
+    /* returns the sun to its default position */
+    transform: translateX(-10px);
+  }
+  28% {
+    transform: translateX(10px);
+  }
+  42% {
+    transform: translateX(-10PX);
+  }
+  70% {
+    transform: translateX(10px);
+  }
+  84% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
+
 td {
   background-color: black;
 }

@@ -10,8 +10,7 @@ https://www.nytimes.com/games-assets/v2/468.ad489ba36805b26451ac.js; ln 7446
 
 # To Do: 
 
-1) The animation of the word after the user wins.
-2) The multiplayer part. Right now, it's Wordle with a slightly different color scheme.
+1) The multiplayer part. Right now, it's Wordle with a slightly different color scheme.
 
 
 
